@@ -1,5 +1,5 @@
- import { useState } from 'react';
-import { motion } from 'framer-motion';
+  
+ import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import shoppingbag from "../assets/shoppingbag.png";
 import Sensiview from '../assets/Sensiview.jpg';
@@ -7,6 +7,7 @@ import newsapp from '../assets/newsmonkeyapp.PNG';
 import chatapp from '../assets/chatapp.PNG';
 import Uber from '../assets/uberClone.JPG';
 import TextUtill from "../assets/TextUtills.PNG";
+import { useState } from 'react';
 
 const Projects = () => {
   const [projects] = useState([
@@ -17,7 +18,6 @@ const Projects = () => {
       image: Sensiview,
       technologies: ["React Native", "Django Rest Framework", "SQLite", "YOLO"],
       githubLink: "https://github.com/abdulsattar576/SENSIVIEW",
-      
     },
     {
       id: 2,
@@ -26,7 +26,6 @@ const Projects = () => {
       image: newsapp,
       technologies: ["React", "Bootstrap"],
       githubLink: "https://github.com/abdulsattar576/NewsMonkeysApp",
-       
     },
     {
       id: 3,
@@ -35,7 +34,6 @@ const Projects = () => {
       image: chatapp,
       technologies: ["React", "Tailwind CSS", "Node.js", "MongoDB", "Express.js", "Socket.io"],
       githubLink: "https://github.com/abdulsattar576/CHATAPP",
-      
     },
     {
       id: 4,
@@ -44,7 +42,6 @@ const Projects = () => {
       image: Uber,
       technologies: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Socket.io", "Google Maps API"],
       githubLink: "https://github.com/abdulsattar576/UBER_CLONE2",
-     
     },
     {
       id: 5,
@@ -61,7 +58,6 @@ const Projects = () => {
       image: shoppingbag,
       technologies: ["React", "Tailwind CSS", "EJS", "Node.js", "Express", "MongoDB"],
       githubLink: "https://github.com/abdulsattar576/SHOPINGBAG",
-       
     },
   ]);
 
@@ -90,9 +86,9 @@ const Projects = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+    <section className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
       <motion.h2 
-        className="text-4xl md:text-5xl font-bold mb-6 text-center"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-center"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -101,7 +97,7 @@ const Projects = () => {
       </motion.h2>
 
       <motion.p 
-        className="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16"
+        className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto text-center mb-8 md:mb-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -111,7 +107,7 @@ const Projects = () => {
       </motion.p>
 
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8"
         variants={container}
         initial="hidden"
         whileInView="visible"
@@ -121,10 +117,10 @@ const Projects = () => {
           <motion.div 
             key={project.id}
             variants={item}
-            whileHover={{ y: -10 }}
-            className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-400/30 transition-all duration-300 group"
+            whileHover={{ y: -5 }}
+            className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-purple-400/30 transition-all duration-300 group"
           >
-            <div className="h-48 bg-black/80 relative overflow-hidden">
+            <div className="h-40 sm:h-48 bg-black/80 relative overflow-hidden">
               <img 
                 src={project.image} 
                 alt={project.title}
@@ -140,20 +136,19 @@ const Projects = () => {
                       className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors"
                       aria-label="GitHub repository"
                     >
-                      <FiGithub className="w-5 h-5" />
+                      <FiGithub className="w-4 h-4 md:w-5 md:h-5" />
                     </a>
                   )}
-                  
                 </div>
               </div>
             </div>
             
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
+            <div className="p-4 md:p-6">
+              <h3 className="text-lg md:text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-300 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-sm md:text-base text-gray-300 mb-3 md:mb-4">{project.description}</p>
+              <div className="flex flex-wrap gap-1 md:gap-2">
                 {project.technologies.map((tech, index) => (
                   <motion.span 
                     key={index}
@@ -161,7 +156,7 @@ const Projects = () => {
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ delay: index * 0.05 }}
                     viewport={{ once: true }}
-                    className="px-3 py-1 bg-gray-700 rounded-full text-sm hover:bg-purple-900/80 transition-colors"
+                    className="px-2 py-1 bg-gray-700 rounded-full text-xs md:text-sm hover:bg-purple-900/80 transition-colors"
                   >
                     {tech}
                   </motion.span>

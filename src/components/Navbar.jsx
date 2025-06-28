@@ -1,17 +1,8 @@
-import { useEffect, useState } from 'react';
+ import { useEffect, useState } from 'react';
 
 const Navbar = ({ setActiveSection, activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -21,40 +12,74 @@ const Navbar = ({ setActiveSection, activeSection }) => {
     { id: 'contact', label: 'Contact' }
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleNavClick = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const yOffset = -80;
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
     setActiveSection(id);
     setDrawerOpen(false);
   };
 
-  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 100;
+      
+      for (const item of navItems) {
+        const section = document.getElementById(item.id);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            setActiveSection(item.id);
+            break;
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [navItems, setActiveSection]);
+
   useEffect(() => {
     if (drawerOpen) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     }
+    
     return () => {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     };
   }, [drawerOpen]);
 
   return (
     <>
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-gray-900/90 backdrop-blur-md' : 'py-4'}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold">
               <span className="text-purple-400">A</span>S
             </div>
-            <div className="hidden md:flex space-x-8">
+
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`relative px-2 py-1 text-lg ${activeSection === item.id ? 'text-purple-400' : 'text-gray-300 hover:text-white'}`}
+                  className={`relative px-2 py-1 text-sm sm:text-base lg:text-lg ${activeSection === item.id ? 'text-purple-400' : 'text-gray-300 hover:text-white'}`}
                 >
                   {item.label}
                   {activeSection === item.id && (
@@ -63,54 +88,56 @@ const Navbar = ({ setActiveSection, activeSection }) => {
                 </button>
               ))}
             </div>
+
             <button
-              className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
+              className="md:hidden p-2 text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
-      <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-        {/* Overlay with smooth transition */}
+      <div 
+        className={`fixed inset-0 z-50 transition-opacity duration-300 ${drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        aria-hidden={!drawerOpen}
+      >
         <div 
           className={`absolute inset-0 bg-black transition-opacity duration-300 ${drawerOpen ? 'opacity-40' : 'opacity-0'}`}
           onClick={() => setDrawerOpen(false)}
+          role="button"
+          tabIndex="0"
+          aria-label="Close menu"
         />
-        
-        {/* Drawer container with smooth slide animation */}
+
         <div 
-          className={`absolute right-0 top-0 h-full w-80 bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`absolute right-0 top-0 h-full w-64 sm:w-80 bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${drawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          {/* Drawer header with close button */}
           <div className="flex justify-between items-center p-4 border-b border-gray-800">
             <div className="text-2xl font-bold">
               <span className="text-purple-400">A</span>S
             </div>
             <button
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
               onClick={() => setDrawerOpen(false)}
               aria-label="Close menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
-          
-          {/* Navigation items */}
-          <div className="p-4 space-y-2">
+
+          <nav className="p-4 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeSection === item.id ? 'bg-gray-800 text-purple-400' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}`}
+                className={`w-full text-left px-4 py-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 ${activeSection === item.id ? 'bg-gray-800 text-purple-400' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}`}
               >
                 <div className="flex items-center">
                   {item.label}
@@ -120,11 +147,10 @@ const Navbar = ({ setActiveSection, activeSection }) => {
                 </div>
               </button>
             ))}
-          </div>
-          
-          
+          </nav>
+
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
-            <p className="text-sm text-gray-400 text-center">© 2023 Sattar Devs</p>
+            <p className="text-xs sm:text-sm text-gray-400 text-center">© {new Date().getFullYear()} Sattar Devs</p>
           </div>
         </div>
       </div>
