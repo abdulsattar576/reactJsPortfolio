@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaFacebook, FaArrowDown } from 'react-icons/fa';
 import BlobAnimation from './BlobAnimation';
-
+import profile from '../assets/profile (1).png'
 const Home = ({ setActiveSection, activeSection }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -182,7 +182,8 @@ const Home = ({ setActiveSection, activeSection }) => {
           }}
         >
           <img 
-            src="src/assets/profile (1).png" 
+            src={profile}
+            
             alt="Abdul Sattar"
             className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 rounded-full object-cover z-10 border-4 border-purple-500/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-300"
           />

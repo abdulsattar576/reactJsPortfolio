@@ -16,6 +16,8 @@ import {
   SiGraphql,
   SiDjango,
 } from "react-icons/si";
+import profile from '../assets/profile (1).png'
+
 
 const About = ({ setActiveSection }) => {
   const skills = [
@@ -116,7 +118,7 @@ const About = ({ setActiveSection }) => {
               viewport={{ once: true }}
             >
               <img
-                src="src/assets/profile (1).png"
+                src={profile}
                 alt="Abdul Sattar"
                 className="w-full h-full rounded-full object-cover border-4 border-purple-400/50 shadow-xl hover:shadow-purple-500/40 transition-all"
               />
