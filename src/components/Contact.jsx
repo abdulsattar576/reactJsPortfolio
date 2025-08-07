@@ -46,7 +46,8 @@ const Contact = () => {
         to_email: 'sattargkl4@gmail.com',
         message: form.message,
       },
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEYSS
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
     )
     .then(() => {
       setSuccess(true);
