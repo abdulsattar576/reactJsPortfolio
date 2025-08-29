@@ -8,16 +8,20 @@ import chatapp from '../assets/chatapp.PNG';
 import Uber from '../assets/uberClone.JPG';
 import TextUtill from "../assets/TextUtills.PNG";
 import { useState } from 'react';
-
+import { BiLinkExternal } from 'react-icons/bi';
+import mernecom from"../assets/mernecom.JPG"
+import phpEcom from"../assets/phpecom.JPG"
+import goaltracker from "../assets/goaltracker.JPG"
 const Projects = () => {
   const [projects] = useState([
-    {
-      id: 1,
-      title: "Real Time Object Detection",
-      description: "Sensiview assists blind users with real-time object detection, currency recognition, text reading, and locating items like seats, doors, and tables.",
-      image: Sensiview,
-      technologies: ["React Native", "Django Rest Framework", "SQLite", "YOLO"],
-      githubLink: "https://github.com/abdulsattar576/SENSIVIEW",
+   
+        {
+id:1,
+title:"E-commerce store",
+description:"A full-stack e-commerce web application with an admin panel built using the MERN stack. Admins can manage products and users with complete CRUD operations, view a dashboard, and organize products category-wise. On the user side, products are displayed by category, and users can add items to their cart. (No payment gateway integration included)",
+image:mernecom,
+technologies:["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB","material-ui","react-router-dom"],
+githubLink:"https://github.com/abdulsattar576/mern-commerce"
     },
     {
       id: 2,
@@ -26,6 +30,7 @@ const Projects = () => {
       image: newsapp,
       technologies: ["React", "Bootstrap"],
       githubLink: "https://github.com/abdulsattar576/NewsMonkeysApp",
+      livelink:"https://newspluse.vercel.app/"
     },
     {
       id: 3,
@@ -35,22 +40,24 @@ const Projects = () => {
       technologies: ["React", "Tailwind CSS", "Node.js", "MongoDB", "Express.js", "Socket.io"],
       githubLink: "https://github.com/abdulsattar576/CHATAPP",
     },
+     {
+      id:4 ,
+      title: "Real Time Object Detection",
+      description: "Sensiview assists blind users with real-time object detection, currency recognition, text reading, and locating items like seats, doors, and tables.",
+      image: Sensiview,
+      technologies: ["React Native", "Django Rest Framework", "SQLite", "YOLO"],
+      githubLink: "https://github.com/abdulsattar576/SENSIVIEW",
+    },
     {
-      id: 4,
+      id: 5,
       title: "Uber Clone",
       description: "A real-time ride-booking app with location suggestions, fare calculation, and vehicle selection. Users can request rides, and nearby drivers receive and accept ride requests in real-time.",
       image: Uber,
       technologies: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Socket.io", "Google Maps API"],
       githubLink: "https://github.com/abdulsattar576/UBER_CLONE2",
     },
-    {
-      id: 5,
-      title: "Text Utill",
-      description: "A text utility app that transforms text to uppercase or lowercase, clears content, removes extra spaces, and copies text. It also provides live word and character count statistics.",
-      image: TextUtill,
-      technologies: ["React", "Bootstrap"],
-      githubLink: "https://github.com/abdulsattar576/TextUtilityApp",
-    },
+
+    
     {
       id: 6,
       title: "Shopping Bag",
@@ -58,7 +65,35 @@ const Projects = () => {
       image: shoppingbag,
       technologies: ["React", "Tailwind CSS", "EJS", "Node.js", "Express", "MongoDB"],
       githubLink: "https://github.com/abdulsattar576/SHOPINGBAG",
+      
     },
+
+    {
+      id: 7,
+      title: "Text Utill",
+      description: "A text utility app that transforms text to uppercase or lowercase, clears content, removes extra spaces, and copies text. It also provides live word and character count statistics.",
+      image: TextUtill,
+      technologies: ["React", "Bootstrap"],
+      githubLink: "https://github.com/abdulsattar576/TextUtilityApp",
+      
+    },
+    {
+      id:8,
+      title:"Mega Mart",
+      description:"A simple e-commerce store built with PHP and MySQL. It allows users to view products, add items to the cart, and checkout. Admins can manage products and users with complete CRUD operations.",
+      image:phpEcom,
+      technologies:["HTML", "CSS", "PHP", "MySQL","JavaScript"],
+      githubLink:"https://github.com/abdulsattar576/php-megamart-store-"
+    },
+    {
+id:9,
+title:"Personal goal tracker",
+description:"A simple web application to track and manage personal goals. Users can create, update, and delete goals, and view progress updates in real-time.",
+image:goaltracker,
+technologies:["React","Tailwind CSS","Firebase","FirebaseAuth","FireBase Storage","Framer Motion"],
+githubLink:"https://github.com/abdulsattar576/Personal_goals_tracker",
+livelink:"https://personal-goals-tracker-1j8g.vercel.app/"
+    }
   ]);
 
   const container = {
@@ -137,6 +172,17 @@ const Projects = () => {
                       aria-label="GitHub repository"
                     >
                       <FiGithub className="w-4 h-4 md:w-5 md:h-5" />
+                    </a>
+                  )}
+ {project.livelink && (
+                    <a 
+                      href={project.livelink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors"
+                      aria-label="GitHub repository"
+                    >
+                      <BiLinkExternal className="w-4 h-4 md:w-5 md:h-5" />
                     </a>
                   )}
                 </div>
